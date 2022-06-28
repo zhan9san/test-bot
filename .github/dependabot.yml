@@ -18,6 +18,8 @@ updates:
     directory: "/"
     schedule:
       interval: daily
+      time: "14:49"
+      timezone: Asia/Shanghai
     open-pull-requests-limit: 3
     labels:
       - "dependencies"
