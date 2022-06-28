@@ -1,7 +1,8 @@
 pull_request_rules:
   - name: Automatic merge on approval ✔
     conditions:
-      - author=zhan9san
+      - author~=^dependabot(|-preview)\[bot\]$
+      - check-success=GitHub Actions Demo / Explore-GitHub-Actions (pull_request)
     actions:
       merge:
         method: merge
