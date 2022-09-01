@@ -26,13 +26,14 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Get list of rules
         run: |
+          dir
           whoami
           ipconfig
           hostname
           choco install --package-parameters=/SSHServerFeature -y openssh
           netstat -aon
           echo $SHELL
+          docker info
           docker run --rm -it busybox sleep 10
