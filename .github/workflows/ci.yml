@@ -34,7 +34,7 @@ jobs:
           ipconfig
           hostname
           Uninstall-Package -Name docker -ProviderName DockerMSFTProvider -Force
-          Get-VM WinContainerHost | Set-VMProcessor -ExposeVirtualizationExtensions $true
+          # Get-VM WinContainerHost | Set-VMProcessor -ExposeVirtualizationExtensions $true
           Install-Module DockerProvider
           Install-Package Docker -ProviderName DockerProvider -RequiredVersion preview -Force
           [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
