@@ -32,6 +32,5 @@ jobs:
           whoami
           ipconfig
           hostname
-          choco install --package-parameters=/SSHServerFeature -y openssh
           netstat -aon
 
