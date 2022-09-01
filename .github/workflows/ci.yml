@@ -27,16 +27,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Get list of rules
-        shell: cmd
+        # shell: cmd
         run: |
           dir
           whoami
           ipconfig
           hostname
-          choco install -y docker-desktop
-          docker info
-          choco install --package-parameters=/SSHServerFeature -y openssh
-          netstat -aon
-          echo $SHELL
+          Uninstall-Package -Name docker -ProviderName DockerMSFTProvider -Force
+          Get-VM WinContainerHost | Set-VMProcessor -ExposeVirtualizationExtensions $true
+          Install-Module DockerProvider
+          Install-Package Docker -ProviderName DockerProvider -RequiredVersion preview -Force
+          [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
+          Restart-Service docker
           
-          docker run --rm -it busybox sleep 10
+          docker info
+        #  choco install --package-parameters=/SSHServerFeature -y openssh
+        #  netstat -aon
+        #  echo $SHELL
+          
+        #  docker run --rm -it busybox sleep 10
