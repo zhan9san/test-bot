@@ -35,7 +35,7 @@ jobs:
           hostname
           Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
           Uninstall-Package -Name docker -ProviderName DockerMSFTProvider -Force
-          # Get-VM WinContainerHost | Set-VMProcessor -ExposeVirtualizationExtensions $true
+          Get-VM WinContainerHost | Set-VMProcessor -ExposeVirtualizationExtensions $true
 
           Install-Module DockerProvider -Force
           Install-Package Docker -ProviderName DockerProvider -RequiredVersion preview -Force
