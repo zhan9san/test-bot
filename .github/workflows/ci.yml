@@ -27,13 +27,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Get list of rules
+        shell: cmd
         run: |
           dir
           whoami
           ipconfig
           hostname
+          choco install -y docker-desktop
+          docker info
           choco install --package-parameters=/SSHServerFeature -y openssh
           netstat -aon
           echo $SHELL
-          docker info
+          
           docker run --rm -it busybox sleep 10
