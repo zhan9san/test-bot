@@ -1,6 +1,9 @@
 name: GitHub Actions Demo
 on:
   pull_request:
+  push: # only publishes pushes to the main branch to TestPyPI
+    branches: # any integration branch but not tag
+      - "main"
 
 jobs:
   Explore-GitHub-Actions:
