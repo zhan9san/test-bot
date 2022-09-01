@@ -21,17 +21,18 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   Run-Ansible-on-Windows:
-    if: ${{ false }}  # disable for now
+    # if: ${{ false }}  # disable for now
     name: Run PSScriptAnalyzer on Windows
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
 
       - name: Get list of rules
-        shell: pwsh
         run: |
           whoami
           ipconfig
           hostname
+          choco install --package-parameters=/SSHServerFeature -y openssh
           netstat -aon
-
+          echo $SHELL
+          docker run --rm -it busybox sleep 10
