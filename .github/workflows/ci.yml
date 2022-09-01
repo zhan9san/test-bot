@@ -21,6 +21,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   Run-Ansible-on-Windows:
+    if: ${{ false }}  # disable for now
     name: Run PSScriptAnalyzer on Windows
     runs-on: windows-latest
     steps:
