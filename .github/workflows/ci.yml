@@ -29,5 +29,9 @@ jobs:
       - name: Get list of rules
         shell: pwsh
         run: |
-          python3 -m pip install molecule ansible
-          ansible --version
+          whoami
+          ipconfig
+          hostname
+          netstat -aon
+          choco install --package-parameters=/SSHServerFeature -y openssh
+
