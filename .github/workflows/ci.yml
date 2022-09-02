@@ -26,25 +26,17 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Get list of rules
-        # shell: cmd
+      - uses: Vampire/setup-wsl@v1
+      - name: Run test in host
+        shell: cmd
         run: |
           dir
           whoami
           ipconfig
           hostname
-          Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
-          Uninstall-Package -Name docker -ProviderName DockerMSFTProvider -Force
-          Get-VM WinContainerHost | Set-VMProcessor -ExposeVirtualizationExtensions $true
-
-          Install-Module DockerProvider -Force
-          Install-Package Docker -ProviderName DockerProvider -RequiredVersion preview -Force
-          [Environment]::SetEnvironmentVariable("LCOW_SUPPORTED", "1", "Machine")
-          Restart-Service docker -Force
-          
-          docker info
-        #  choco install --package-parameters=/SSHServerFeature -y openssh
-        #  netstat -aon
-        #  echo $SHELL
-          
-        #  docker run --rm -it busybox sleep 10
+      - name: Run test in wsl
+        shell: wsl-bash {0}
+        run: |
+          hostname
+          ip a
+          python3 -V
