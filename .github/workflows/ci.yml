@@ -47,8 +47,9 @@ jobs:
 
       - name: Run tests in wsl
         shell: wsl-bash {0}
-        working-directory: /mnt/d/a/test-bot/test-bot
+        # working-directory: /mnt/d/a/test-bot/test-bot
         run: |
+          cd /mnt/d/a/test-bot/test-bot
           ls -l
           molecule test --help
 
