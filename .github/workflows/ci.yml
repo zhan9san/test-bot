@@ -34,7 +34,7 @@ jobs:
           whoami
           ipconfig
           hostname
-      - name: Run test in wsl
+      - name: Install packages in wsl
         shell: wsl-bash {0}
         run: |
           ls -l /mnt/d/a/test-bot/
@@ -43,4 +43,12 @@ jobs:
           ip a
           sudo apt-get update
           sudo apt-get -y install python3-pip python3
-          python3 -V
+          python3 -m pip install ansible molecule
+
+      - name: Run tests in wsl
+        shell: wsl-bash {0}
+        working-directory: /mnt/d/a/test-bot/test-bot
+        run: |
+          ls -l
+          molecule test --help
+
