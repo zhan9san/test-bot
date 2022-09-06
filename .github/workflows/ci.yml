@@ -50,5 +50,5 @@ jobs:
         run: |
           cd /mnt/d/a/test-bot/test-bot
           ls -l
-          molecule test --help
+          molecule --help
 
