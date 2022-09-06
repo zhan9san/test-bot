@@ -37,6 +37,7 @@ jobs:
       - name: Install packages in wsl
         shell: wsl-bash {0}
         run: |
+          cat /mnt/d/a/_temp/wsl-shell-wrapper/wsl-bash.BAT
           ls -l /mnt/d/a/test-bot/
           whoami
           hostname
@@ -57,6 +58,5 @@ jobs:
         run: |
            export PATH=/root/.local/bin:$PATH
            echo $PATH
-           molecule --version
 
 
