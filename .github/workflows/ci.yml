@@ -54,6 +54,8 @@ jobs:
            ls -l
            env
            which python3
+           export PATH=/too/.local/bin$PATH
+           echo $PATH
            which molecule
            python3 -V
       - name: Run molecule in host
