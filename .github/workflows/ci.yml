@@ -54,7 +54,7 @@ jobs:
            ls -l
            env
            which python3
-           export PATH=/root/.local/bin$PATH
+           export PATH=/root/.local/bin:$PATH
            echo $PATH
            which molecule
            python3 -V
