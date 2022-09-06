@@ -53,6 +53,8 @@ jobs:
            pwd
            ls -l
            env
+           python -V
+           molecule --version
       - name: Run molecule in host
         shell: cmd
         run: |
