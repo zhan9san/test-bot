@@ -58,9 +58,5 @@ jobs:
            export PATH=/root/.local/bin:$PATH
            echo $PATH
            molecule --version
-      - name: Run molecule in host
-        shell: 
-        run: |
-           hostname
 
 
