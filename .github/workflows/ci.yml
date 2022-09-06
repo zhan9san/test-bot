@@ -48,16 +48,12 @@ jobs:
       - name: Run tests in wsl
         # shell: cmd
         shell: wsl-bash {0}
-        # run: cd /mnt/d/a/test-bot/test-bot;pwd;ls -l;
         run: |
+           cd /mnt/d/a/test-bot/test-bot
            pwd
            ls -l
-           env
-           which python3
            export PATH=/root/.local/bin:$PATH
-           echo $PATH
-           which molecule
-           python3 -V
+           molecule test --help
       - name: Run molecule in host
         shell: cmd
         run: |
