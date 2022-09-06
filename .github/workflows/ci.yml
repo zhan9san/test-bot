@@ -53,7 +53,6 @@ jobs:
            pwd
            ls -l
            env
-           molecule --help
       - name: Run molecule in host
         shell: cmd
         run: |
