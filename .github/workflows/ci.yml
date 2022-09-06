@@ -49,4 +49,4 @@ jobs:
         shell: cmd
         # shell: wsl-bash {0}
         # run: cd /mnt/d/a/test-bot/test-bot;pwd;ls -l;
-        run: wsl --cd /mnt/d/a/test-bot/test-bot molecule test --help
+        run: wsl molecule test --help
