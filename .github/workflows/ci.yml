@@ -46,6 +46,7 @@ jobs:
           python3 -m pip install ansible molecule
 
       - name: Run tests in wsl
+        shell: cmd
         # shell: wsl-bash {0}
         # run: cd /mnt/d/a/test-bot/test-bot;pwd;ls -l;
-        run: wsl molecule test --help
+        run: wsl --cd /mnt/d/a/test-bot/test-bot molecule test --help
