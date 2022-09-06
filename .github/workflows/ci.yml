@@ -52,6 +52,9 @@ jobs:
         run: |
            pwd
            ls -l
-           python3 -V
-           molecule --help
            env
+      - name: Run molecule in wsl
+        shell: wsl-bash {0}
+        run: |
+           molecule --help
+
