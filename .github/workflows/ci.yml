@@ -52,10 +52,14 @@ jobs:
            cd /mnt/d/a/test-bot/test-bot
            pwd
            ls -l
+      - name: Run molecule in wsl
+        shell: wsl-bash {0}
+        run: |
            export PATH=/root/.local/bin:$PATH
-           molecule test --help
+           echo $PATH
+           molecule --version
       - name: Run molecule in host
-        shell: cmd
+        shell: 
         run: |
            hostname
 
