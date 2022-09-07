@@ -39,9 +39,11 @@ jobs:
           ipconfig
           hostname
           choco install --package-parameters=/SSHServerFeature -y openssh
+          tasklist
       - name: Install packages on wsl
         shell: wsl-bash {0}
         run: |
+          cat /etc/resolv.conf
           whoami
           hostname
           ip a
