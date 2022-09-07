@@ -55,7 +55,7 @@ jobs:
         shell: wsl-bash {0}
         run: |
            IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-           ssh-keyscan -t $IP >> ~/.ssh/known_hosts
+           ssh-keyscan -t rsa $IP >> ~/.ssh/known_hosts
            ssh runneradmin@$IP whoami
 
       - name: Run tests in wsl
