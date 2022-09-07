@@ -26,39 +26,48 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: luchihoratiu/debug-via-ssh@main
-        with:
-          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-          SSH_PASS: ${{ secrets.SSH_PASS }}
+      #- uses: luchihoratiu/debug-via-ssh@main
+      #  with:
+      #    NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+      #    SSH_PASS: ${{ secrets.SSH_PASS }}
       - uses: Vampire/setup-wsl@v1
-      - name: Run test in host
+      - name: Install ssh server on host
         shell: cmd
         run: |
           dir
           whoami
           ipconfig
           hostname
-      - name: Install packages in wsl
+          choco install --package-parameters=/SSHServerFeature -y openssh
+      - name: Install packages on wsl
         shell: wsl-bash {0}
         run: |
-          cat /mnt/d/a/_temp/wsl-shell-wrapper/wsl-bash.BAT
-          ls -l /mnt/d/a/test-bot/
+          ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
+          cat ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+          cp ~/.ssh/id_rsa.pub /mnt/c/ProgramData/ssh/administrators_authorized_keys
           whoami
           hostname
           ip a
           sudo apt-get update
           sudo apt-get -y install python3-pip python3
           python3 -m pip install ansible molecule
+      - name: Grant permission of public keys on host
+        shell: cmd
+        run: |
+          icacls C:\ProgramData\ssh\administrators_authorized_keys /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
+
+      - name: Run ssh test in wsl
+        shell: wsl-bash {0}
+        run: |
+           IP=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
+           ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no runneradmin@$IP whoami
 
       - name: Run tests in wsl
-        # shell: cmd
         shell: wsl-bash {0}
         run: |
            echo $PATH
            cd /mnt/d/a/test-bot/test-bot
            pwd
            ls -l
-      - name: Run molecule in wsl
-        shell: wsl-bash {0}
-        run: |
            molecule test --help
+
