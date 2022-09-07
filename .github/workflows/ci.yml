@@ -26,10 +26,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: luchihoratiu/debug-via-ssh@main
-        with:
-          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-          SSH_PASS: ${{ secrets.SSH_PASS }}
+      #- uses: luchihoratiu/debug-via-ssh@main
+      #  with:
+      #    NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+      #    SSH_PASS: ${{ secrets.SSH_PASS }}
       - uses: Vampire/setup-wsl@v1
       - name: Install ssh server on host
         shell: cmd
@@ -63,8 +63,7 @@ jobs:
       - name: Run ssh test in wsl
         shell: wsl-bash {0}
         run: |
-           sleep 100000
-           IP=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
+           IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
            ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no runneradmin@$IP whoami
 
       - name: Run tests in wsl
